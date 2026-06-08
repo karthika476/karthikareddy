@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karthika Reddy Palagiri — Data & BI Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#F6F1E7;--cream-dark:#EDE4D0;--cream-mid:#E5DAC4;
+    --beige:#D4C4A5;--beige-dark:#BFA882;
+    --bark:#8B6B42;--bark-dark:#6B4F2A;--bark-light:#A8845A;
+    --moss:#587A48;--moss-light:#7A9E64;--moss-pale:#C4D8B4;
+    --forest:#3A5C2A;--forest-dark:#2A4420;--forest-deep:#1E3216;
+    --sage:#8EA87C;--fern:#4A6B38;--lichen:#B8CAA8;--wood:#9A7248;
+    --ink:#2C2018;--gold:#C8983A;--gold-light:#E8C06A;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);font-family:'Source Sans 3',sans-serif;color:var(--ink);overflow-x:hidden;}
+
+  /* CURSOR */
+  body{cursor:none;}
+  .cursor{width:10px;height:10px;background:var(--moss);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;}
+  .cursor-ring{width:32px;height:32px;border:1.5px solid var(--moss);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:5px;}
+  ::-webkit-scrollbar-track{background:var(--cream);}
+  ::-webkit-scrollbar-thumb{background:var(--moss);border-radius:3px;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(30,50,22,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.06);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);letter-spacing:0.06em;text-decoration:none;}
+  .nav-logo span{color:var(--moss-light);font-style:italic;}
+  .nav-links{display:flex;gap:0;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--lichen);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;padding:0 16px;height:60px;display:flex;align-items:center;font-weight:500;transition:color 0.2s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:var(--moss-light);transform:scaleX(0);transition:transform 0.25s;}
+  .nav-links a:hover{color:var(--cream);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+
+  /* HERO */
+  .hero{min-height:100vh;background:var(--forest-deep);display:flex;align-items:center;position:relative;overflow:hidden;padding:7rem 3rem 5rem;}
+  .hero-bg{position:absolute;inset:0;background-image:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(58,92,42,0.35) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(87,122,72,0.2) 0%,transparent 50%);pointer-events:none;}
+  .hero-dots{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+  .dot{position:absolute;border-radius:50%;background:var(--moss);opacity:0;animation:floatDot 8s ease-in-out infinite;}
+  @keyframes floatDot{0%{opacity:0;transform:translateY(0) scale(1);}20%{opacity:0.18;}80%{opacity:0.08;}100%{opacity:0;transform:translateY(-120px) scale(0.5);}}
+  .hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;display:grid;grid-template-columns:1fr 360px;gap:4rem;align-items:center;}
+
+  .hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.25em;color:var(--moss-light);margin-bottom:1.4rem;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;}
+  .eyebrow-line{width:32px;height:1px;background:var(--moss-light);}
+  .hero h1{font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--cream);line-height:1.05;margin-bottom:1rem;opacity:0;animation:fadeUp 0.8s 0.35s forwards;}
+  .hero h1 em{font-style:italic;color:var(--moss-light);display:block;}
+  .hero-subtitle{font-size:13.5px;color:var(--sage);letter-spacing:0.06em;margin-bottom:1.6rem;opacity:0;animation:fadeUp 0.8s 0.5s forwards;}
+
+  /* MISSION STATEMENT — the hook */
+  .hero-mission{background:rgba(87,122,72,0.12);border:1px solid rgba(122,158,100,0.25);border-left:3px solid var(--moss-light);border-radius:0 8px 8px 0;padding:1.2rem 1.4rem;margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s 0.62s forwards;}
+  .hero-mission p{font-family:'Lora',serif;font-size:15px;color:var(--lichen);line-height:1.75;font-style:italic;}
+  .hero-mission p strong{font-style:normal;color:var(--moss-pale);font-weight:500;}
+
+  .hero-cta-row{display:flex;gap:1rem;opacity:0;animation:fadeUp 0.8s 0.8s forwards;flex-wrap:wrap;}
+  .btn-primary{padding:12px 28px;background:var(--moss);color:var(--cream);text-decoration:none;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;border:none;border-radius:2px;transition:background 0.2s,transform 0.15s;display:inline-block;cursor:none;}
+  .btn-primary:hover{background:var(--fern);transform:translateY(-2px);}
+  .btn-outline{padding:12px 28px;background:transparent;color:var(--lichen);text-decoration:none;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;border:1px solid rgba(180,200,168,0.35);border-radius:2px;transition:border-color 0.2s,color 0.2s,transform 0.15s;display:inline-block;cursor:none;}
+  .btn-outline:hover{border-color:var(--lichen);color:var(--cream);transform:translateY(-2px);}
+
+  /* HERO SIDE PANEL */
+  .hero-panel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1.8rem;opacity:0;animation:fadeLeft 0.9s 0.9s forwards;}
+  .panel-label{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--sage);margin-bottom:1.4rem;}
+  .stat-item{padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:baseline;}
+  .stat-item:last-of-type{border-bottom:none;}
+  .stat-val{font-family:'Playfair Display',serif;font-size:26px;color:var(--moss-light);font-weight:600;}
+  .stat-lbl{font-size:12px;color:var(--sage);text-align:right;max-width:110px;line-height:1.4;}
+  .hero-contacts{margin-top:1.4rem;display:flex;flex-direction:column;gap:8px;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.06);}
+  .contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--lichen);text-decoration:none;transition:color 0.2s;}
+  .contact-item:hover{color:var(--cream);}
+  .contact-item svg{opacity:0.65;flex-shrink:0;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeLeft{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
+
+  /* SHARED SECTION */
+  section{padding:5.5rem 3rem;}
+  .section-inner{max-width:1100px;margin:0 auto;}
+  .section-label{font-size:10px;text-transform:uppercase;letter-spacing:0.28em;color:var(--bark);margin-bottom:0.5rem;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:'';width:22px;height:1px;background:var(--bark);}
+  .section-heading{font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:var(--forest);margin-bottom:3rem;line-height:1.15;}
+  .section-heading em{font-style:italic;color:var(--bark);}
+
+  /* ── PASSION SECTION ── */
+  .passion-section{background:var(--forest);padding:5rem 3rem;position:relative;overflow:hidden;}
+  .passion-section::after{content:'';position:absolute;bottom:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(87,122,72,0.12);pointer-events:none;}
+  .passion-inner{max-width:1100px;margin:0 auto;}
+  .passion-header{margin-bottom:3rem;}
+  .passion-label{font-size:10px;text-transform:uppercase;letter-spacing:0.28em;color:var(--moss-light);margin-bottom:0.5rem;display:flex;align-items:center;gap:10px;}
+  .passion-label::before{content:'';width:22px;height:1px;background:var(--moss-light);}
+  .passion-heading{font-family:'Playfair Display',serif;font-size:34px;color:var(--cream);font-weight:600;line-height:1.2;}
+  .passion-heading em{color:var(--moss-light);font-style:italic;}
+  .passion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+  .passion-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.6rem;transition:background 0.25s,transform 0.2s;}
+  .passion-card:hover{background:rgba(87,122,72,0.18);transform:translateY(-4px);}
+  .passion-icon{width:44px;height:44px;border-radius:10px;background:var(--fern);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;}
+  .passion-card-title{font-size:15px;color:var(--cream);font-weight:600;margin-bottom:0.5rem;font-family:'Playfair Display',serif;}
+  .passion-card-body{font-size:13px;color:var(--lichen);line-height:1.7;}
+
+  /* ── SKILLS ── */
+  .skills-section{background:var(--cream-dark);}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+  .skill-group-title{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--bark);font-weight:600;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--beige);}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid;transition:transform 0.15s;cursor:none;}
+  .chip:hover{transform:translateY(-2px);}
+  .chip-a{background:rgba(87,122,72,0.15);border-color:rgba(87,122,72,0.45);color:var(--forest);}
+  .chip-b{background:rgba(139,107,66,0.12);border-color:rgba(139,107,66,0.4);color:var(--bark-dark);}
+  .chip-c{background:rgba(78,107,56,0.12);border-color:rgba(78,107,56,0.4);color:var(--fern);}
+
+  /* ── SOFT SKILLS / WORK ETHIC ── */
+  .ethic-section{background:var(--cream);}
+  .ethic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+  .ethic-card{background:#fff;border:1px solid var(--cream-mid);border-radius:10px;padding:1.6rem;display:flex;gap:1rem;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s;}
+  .ethic-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(58,92,42,0.08);}
+  .ethic-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ethic-icon.moss{background:rgba(87,122,72,0.15);}
+  .ethic-icon.bark{background:rgba(139,107,66,0.12);}
+  .ethic-icon.forest{background:rgba(58,92,42,0.12);}
+  .ethic-icon.gold{background:rgba(200,152,58,0.12);}
+  .ethic-title{font-size:15px;font-weight:600;color:var(--forest);margin-bottom:4px;font-family:'Playfair Display',serif;}
+  .ethic-body{font-size:13.5px;color:#5A4228;line-height:1.65;}
+
+  /* ── GROWTH JOURNEY ── */
+  .journey-section{background:var(--cream-dark);}
+  .timeline{position:relative;padding-left:2rem;}
+  .timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--moss),var(--bark),var(--moss));}
+  .tl-item{position:relative;padding:0 0 2.5rem 2rem;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{position:absolute;left:-1.85rem;top:4px;width:14px;height:14px;border-radius:50%;background:var(--cream);border:2.5px solid var(--moss);transition:background 0.2s;}
+  .tl-item:hover .tl-dot{background:var(--moss);}
+  .tl-item.bark-dot .tl-dot{border-color:var(--bark);}
+  .tl-item.bark-dot:hover .tl-dot{background:var(--bark);}
+  .tl-date{font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--bark);font-weight:600;margin-bottom:4px;}
+  .tl-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--forest);margin-bottom:6px;}
+  .tl-body{font-size:13.5px;color:#5A4228;line-height:1.65;max-width:680px;}
+  .tl-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+  .tl-tag{background:var(--moss-pale);color:var(--forest);font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;}
+
+  /* ── EXPERIENCE ── */
+  .exp-section{background:var(--cream);}
+  .exp-list{display:flex;flex-direction:column;gap:1.5rem;}
+  .exp-card{background:#fff;border:1px solid var(--cream-mid);border-left:5px solid var(--moss);border-radius:0 10px 10px 0;padding:2rem 2.5rem;transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;}
+  .exp-card::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(87,122,72,0.05),transparent);border-radius:50%;transform:translate(40px,-40px);}
+  .exp-card:hover{transform:translateX(4px);box-shadow:-4px 0 0 0 var(--moss),4px 4px 20px rgba(58,92,42,0.08);}
+  .exp-card.bark-line{border-left-color:var(--bark);}
+  .exp-card.bark-line:hover{box-shadow:-4px 0 0 0 var(--bark),4px 4px 20px rgba(139,111,66,0.08);}
+  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;flex-wrap:wrap;gap:10px;}
+  .exp-role{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--forest);}
+  .exp-badge{background:var(--cream-dark);border:1px solid var(--beige);color:var(--bark);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;padding:4px 12px;border-radius:20px;font-weight:600;white-space:nowrap;}
+  .exp-org{font-size:13px;color:var(--bark-light);font-style:italic;margin-bottom:1.4rem;}
+  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .exp-bullets li{font-size:14px;color:#4A3820;line-height:1.65;padding-left:20px;position:relative;}
+  .exp-bullets li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--moss-pale);border:1.5px solid var(--moss);}
+  .exp-metrics{display:flex;gap:10px;margin-top:1.4rem;flex-wrap:wrap;}
+  .metric{background:var(--cream-dark);border:1px solid var(--beige);border-radius:8px;padding:8px 16px;text-align:center;}
+  .metric-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest);display:block;line-height:1;}
+  .metric-lbl{font-size:10px;color:var(--bark);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-top:4px;}
+
+  /* ── PROJECTS ── */
+  .projects-section{background:var(--cream-dark);}
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .project-card{background:var(--cream);border:1px solid var(--beige);border-top:4px solid var(--bark);border-radius:0 0 10px 10px;padding:1.8rem 2rem;transition:transform 0.2s,box-shadow 0.2s;}
+  .project-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(58,92,42,0.1);}
+  .project-card:first-child{border-top-color:var(--moss);}
+  .project-tag{font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--wood);background:var(--cream-dark);padding:3px 10px;border-radius:10px;font-weight:600;display:inline-block;margin-bottom:0.8rem;}
+  .project-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--forest-dark);margin-bottom:0.75rem;line-height:1.3;}
+  .project-desc{font-size:13.5px;color:#5A4228;line-height:1.7;margin-bottom:1.2rem;}
+  .highlight-pills{display:flex;gap:7px;flex-wrap:wrap;}
+  .pill{background:var(--moss-pale);color:var(--forest);font-size:11px;padding:4px 10px;border-radius:12px;font-weight:600;letter-spacing:0.03em;}
+
+  /* ── EDUCATION ── */
+  .edu-section{background:var(--cream);}
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .edu-card{background:var(--cream-dark);border:1px solid var(--beige);border-radius:10px;padding:2rem;position:relative;overflow:hidden;}
+  .edu-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(87,122,72,0.07);}
+  .edu-icon{width:44px;height:44px;border-radius:10px;background:var(--moss);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
+  .edu-icon.bark{background:var(--bark);}
+  .edu-degree{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--forest-dark);margin-bottom:4px;line-height:1.3;}
+  .edu-school{font-size:12.5px;color:var(--bark);font-style:italic;margin-bottom:1rem;}
+  .edu-mod-label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--bark);margin-bottom:6px;font-weight:600;}
+  .edu-mod-text{font-size:13px;color:#5A4228;line-height:1.6;}
+
+  /* ── CERTS ── */
+  .certs-section{background:var(--forest-deep);padding:5rem 3rem;}
+  .certs-inner{max-width:1100px;margin:0 auto;}
+  .certs-heading{font-family:'Playfair Display',serif;font-size:32px;color:var(--cream);margin-bottom:2.5rem;}
+  .certs-heading em{color:var(--moss-light);font-style:italic;}
+  .certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:4rem;}
+  .cert-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.4rem;transition:background 0.2s,transform 0.2s;cursor:none;}
+  .cert-card:hover{background:rgba(87,122,72,0.18);transform:translateY(-3px);}
+  .cert-icon{width:36px;height:36px;border-radius:8px;background:var(--fern);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;}
+  .cert-name{font-size:14px;color:var(--cream);font-weight:500;margin-bottom:3px;line-height:1.3;}
+  .cert-issuer{font-size:11px;color:var(--sage);text-transform:uppercase;letter-spacing:0.1em;}
+
+  /* ── HIRE ME CTA ── */
+  .hire-section{background:var(--forest-deep);padding:0 3rem 5rem;}
+  .hire-inner{max-width:1100px;margin:0 auto;}
+  .hire-box{background:rgba(87,122,72,0.12);border:1px solid rgba(122,158,100,0.22);border-radius:16px;padding:3.5rem;position:relative;overflow:hidden;text-align:center;}
+  .hire-box::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:280px;height:280px;border-radius:50%;background:rgba(87,122,72,0.08);pointer-events:none;}
+  .hire-label{font-size:10px;text-transform:uppercase;letter-spacing:0.28em;color:var(--moss-light);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .hire-label::before,.hire-label::after{content:'';width:28px;height:1px;background:var(--moss-light);}
+  .hire-heading{font-family:'Playfair Display',serif;font-size:36px;color:var(--cream);line-height:1.2;margin-bottom:1rem;}
+  .hire-heading em{color:var(--moss-light);font-style:italic;}
+  .hire-body{font-family:'Lora',serif;font-size:15.5px;color:var(--lichen);line-height:1.8;max-width:580px;margin:0 auto 2rem;font-style:italic;}
+  .hire-qualities{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .quality-tag{background:rgba(87,122,72,0.2);border:1px solid rgba(122,158,100,0.3);color:var(--moss-pale);font-size:12px;padding:6px 14px;border-radius:20px;font-weight:500;display:flex;align-items:center;gap:5px;}
+  .quality-tag svg{opacity:0.8;}
+  .hire-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+  /* FOOTER */
+  footer{background:var(--forest-deep);border-top:1px solid rgba(255,255,255,0.05);padding:3rem;text-align:center;}
+  .footer-name{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);margin-bottom:0.5rem;}
+  .footer-tagline{font-size:12px;color:var(--sage);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2rem;}
+  .footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+  .footer-link{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--lichen);text-decoration:none;transition:color 0.2s;}
+  .footer-link:hover{color:var(--cream);}
+  .footer-copy{margin-top:2.5rem;font-size:11px;color:rgba(184,202,168,0.3);letter-spacing:0.08em;}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}.d5{transition-delay:0.5s;}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-inner,.skills-grid,.passion-grid,.projects-grid,.edu-grid,.ethic-grid{grid-template-columns:1fr;}
+    .hero-panel{display:none;}
+    .hero h1{font-size:44px;}
+    .certs-grid{grid-template-columns:1fr 1fr;}
+    nav{padding:0 1.5rem;}
+    .nav-links{display:none;}
+    section,.passion-section,.certs-section,.hire-section{padding:4rem 1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Karthika <span>Reddy</span></a>
+  <ul class="nav-links">
+    <li><a href="#passion">Why Data</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hire">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow"><span class="eyebrow-line"></span>Data &amp; Business Intelligence Analyst · Actively Seeking Roles</p>
+      <h1>Karthika<br><em>Reddy Palagiri</em></h1>
+      <p class="hero-subtitle">MSc Business Analytics · University of Warwick &nbsp;·&nbsp; Power BI · SQL · Python · AI</p>
+      <div class="hero-mission">
+        <p>I believe <strong>data is a language</strong> — one that, when spoken clearly, moves organisations forward. Every dashboard I build, every model I train, every insight I surface is driven by a genuine desire to <strong>make complexity understandable</strong> and decisions smarter. I show up curious every single day.</p>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#hire" class="btn-primary">Open to Opportunities</a>
+        <a href="#experience" class="btn-outline">Explore My Work</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <p class="panel-label">Key impact highlights</p>
+      <div class="stat-item"><span class="stat-val">70%</span><span class="stat-lbl">Faster reporting insights</span></div>
+      <div class="stat-item"><span class="stat-val">35%</span><span class="stat-lbl">Reduction in manual effort</span></div>
+      <div class="stat-item"><span class="stat-val">25%</span><span class="stat-lbl">Risk model accuracy lift</span></div>
+      <div class="stat-item"><span class="stat-val">93%</span><span class="stat-lbl">Patient satisfaction achieved</span></div>
+      <div class="hero-contacts">
+        <a href="mailto:karthikapalagiri@gmail.com" class="contact-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          karthikapalagiri@gmail.com
+        </a>
+        <span class="contact-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18v-.08Z"/></svg>
+          +91 9866034664
+        </span>
+        <span class="contact-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Andhra Pradesh, India
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY I LOVE DATA — PASSION -->
+<section id="passion" class="passion-section">
+  <div class="passion-inner">
+    <div class="passion-header reveal">
+      <p class="passion-label">What Drives Me</p>
+      <h2 class="passion-heading">I don't just work with data —<br><em>I'm fascinated by it.</em></h2>
+    </div>
+    <div class="passion-grid">
+      <div class="passion-card reveal d1">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <p class="passion-card-title">The thrill of discovery</p>
+        <p class="passion-card-body">There is nothing more exciting than staring at a messy dataset and finding the hidden story inside. That moment when a pattern surfaces — the kind that changes a business decision — is what gets me up in the morning.</p>
+      </div>
+      <div class="passion-card reveal d2">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p class="passion-card-title">Making an impact on real people</p>
+        <p class="passion-card-body">From cutting hospital wait times to helping individuals access fairer credit — my work has touched real lives. I want to keep building solutions where the numbers mean something beyond spreadsheets.</p>
+      </div>
+      <div class="passion-card reveal d3">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <p class="passion-card-title">Always learning, always growing</p>
+        <p class="passion-card-body">I chose to pursue an MSc at Warwick not because I had to — but because I was hungry to go deeper. From NLP to Generative AI to financial risk modelling, I pursue certifications and new skills on my own time, every week.</p>
+      </div>
+      <div class="passion-card reveal d1">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <p class="passion-card-title">Turning complexity into clarity</p>
+        <p class="passion-card-body">I genuinely love the challenge of taking something technically complex — a multi-source data model, a risk scoring algorithm — and presenting it so that a non-technical stakeholder immediately understands and trusts it.</p>
+      </div>
+      <div class="passion-card reveal d2">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <p class="passion-card-title">Building things from scratch</p>
+        <p class="passion-card-body">Whether it's a Power BI dashboard from zero, a hackathon prototype built overnight, or an automated pipeline replacing hours of manual work — I take ownership and follow through until the solution is genuinely useful.</p>
+      </div>
+      <div class="passion-card reveal d3">
+        <div class="passion-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <p class="passion-card-title">Delivering under pressure</p>
+        <p class="passion-card-body">Tight deadlines, shifting requirements, cross-functional pressure — I thrive in it. My track record shows consistent delivery: 35% less manual effort, 20% better data accuracy, and measurably faster insights every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-inner">
+    <p class="section-label">Technical Toolkit</p>
+    <h2 class="section-heading">Skills &amp; <em>Technologies</em></h2>
+    <div class="skills-grid">
+      <div class="reveal d1">
+        <p class="skill-group-title">Data &amp; Analytics</p>
+        <div class="chips">
+          <span class="chip chip-a">SQL</span><span class="chip chip-a">Python</span><span class="chip chip-a">R Studio</span><span class="chip chip-a">SAS</span>
+          <span class="chip chip-a">Statistical Modelling</span><span class="chip chip-a">Machine Learning</span><span class="chip chip-a">Predictive Analytics</span>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <p class="skill-group-title">BI &amp; Visualisation</p>
+        <div class="chips">
+          <span class="chip chip-b">Power BI</span><span class="chip chip-b">DAX</span><span class="chip chip-b">Power Query</span><span class="chip chip-b">Tableau</span>
+          <span class="chip chip-b">Advanced Excel</span><span class="chip chip-b">VBA</span><span class="chip chip-b">KPI Dashboards</span>
+        </div>
+      </div>
+      <div class="reveal d3">
+        <p class="skill-group-title">Cloud &amp; Delivery</p>
+        <div class="chips">
+          <span class="chip chip-c">Google BigQuery</span><span class="chip chip-c">Azure DevOps</span><span class="chip chip-c">Power Automate</span>
+          <span class="chip chip-c">Git</span><span class="chip chip-c">Agile</span><span class="chip chip-c">Generative AI</span><span class="chip chip-c">NLP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK ETHIC — SOFT SKILLS -->
+<section class="ethic-section">
+  <div class="section-inner">
+    <p class="section-label">How I Work</p>
+    <h2 class="section-heading">Work Ethic &amp; <em>Character</em></h2>
+    <div class="ethic-grid">
+      <div class="ethic-card reveal d1">
+        <div class="ethic-icon moss">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--moss)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Self-starter with relentless drive</p>
+          <p class="ethic-body">I proactively identify gaps before they become problems. At BrentInnovate, I didn't wait to be asked — I spotted inefficient manual workflows and redesigned them, saving the team 35% of their reporting time.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d2">
+        <div class="ethic-icon bark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Collaborative team player</p>
+          <p class="ethic-body">I build trust across technical and non-technical teams. Whether it's credit analysts, operations leads, or hospital administrators — I translate data insights into language that each stakeholder actually cares about.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d3">
+        <div class="ethic-icon forest">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="2"><path d="M2 20h.01M7 20v-4"/><path d="M12 20V10"/><path d="M17 20V4"/><path d="M22 20h.01"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Detail-oriented &amp; quality-driven</p>
+          <p class="ethic-body">I treat data quality as non-negotiable. My validation frameworks at BrentInnovate improved accuracy by 20% — because I know that a beautiful dashboard built on dirty data is worse than no dashboard at all.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d4">
+        <div class="ethic-icon gold">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Ownership mentality</p>
+          <p class="ethic-body">I don't stop at "technically done." From managing end-to-end analytics projects at a hospital internship to winning a hackathon at Warwick, I take full responsibility for my work from first brief to final outcome.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d1">
+        <div class="ethic-icon moss">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--moss)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Adaptable &amp; fast learner</p>
+          <p class="ethic-body">I've switched contexts from healthcare analytics to lending and insurance without missing a beat. New domain? I ask smart questions, dive into the data, and deliver insights quickly — without needing hand-holding.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d2">
+        <div class="ethic-icon bark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--bark)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <p class="ethic-title">Clear &amp; confident communicator</p>
+          <p class="ethic-body">I present to executives and junior teams alike — adapting my message for the audience. I've learned that the best analysis is useless if it isn't communicated in a way that compels action, so I invest deeply in storytelling.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING JOURNEY / TIMELINE -->
+<section id="journey" class="journey-section">
+  <div class="section-inner">
+    <p class="section-label">Growth Story</p>
+    <h2 class="section-heading">My Learning <em>Journey</em></h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Sep 2020 — Aug 2024</p>
+        <p class="tl-title">Built the foundation — Computer Science at VIT</p>
+        <p class="tl-body">Graduated with an 8.0/10 in Computer Science, developing strong fundamentals in algorithms, software engineering, and data structures. Curiosity about real-world data problems led me to start self-studying SQL and Python alongside coursework — because I wanted to understand not just how systems work, but what they reveal.</p>
+        <div class="tl-tags"><span class="tl-tag">CS Fundamentals</span><span class="tl-tag">SQL</span><span class="tl-tag">Algorithms</span></div>
+      </div>
+
+      <div class="tl-item bark-dot reveal d2">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Jun 2023 — Aug 2023</p>
+        <p class="tl-title">First real-world impact — Hospital Business Analyst Internship</p>
+        <p class="tl-body">Walked into a hospital with spreadsheets and walked out with a data-driven transformation. I saw firsthand how analytics could reduce patient suffering — cutting wait times by 33% and lifting satisfaction from 74% to 93%. This experience confirmed: I want to build things that matter to real people.</p>
+        <div class="tl-tags"><span class="tl-tag">Business Analysis</span><span class="tl-tag">Power BI</span><span class="tl-tag">Process Improvement</span></div>
+      </div>
+
+      <div class="tl-item reveal d3">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2023 — Ongoing (Self-directed)</p>
+        <p class="tl-title">Investing in expertise — Certifications pursued on own initiative</p>
+        <p class="tl-body">While studying and working, I independently pursued certifications in Power BI, NLP, and Generative AI — not because a syllabus required it, but because I was fascinated and wanted to stay ahead. This reflects the kind of employee I am: I don't wait for a training budget to grow.</p>
+        <div class="tl-tags"><span class="tl-tag">Power BI Certified</span><span class="tl-tag">NLP</span><span class="tl-tag">Gen AI</span></div>
+      </div>
+
+      <div class="tl-item bark-dot reveal d1">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Sep 2024 — Sep 2025</p>
+        <p class="tl-title">Going deeper — MSc Business Analytics at Warwick (Merit)</p>
+        <p class="tl-body">Chose Warwick — one of the UK's top business schools — for the rigour and the challenge. Studied financial risk management, advanced analytics, and business forecasting. Competed in a hackathon where I built a full credit-scoring prototype in 48 hours. Graduated with Merit.</p>
+        <div class="tl-tags"><span class="tl-tag">Warwick Merit</span><span class="tl-tag">Financial Risk</span><span class="tl-tag">Hackathon Winner</span></div>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Jan 2025 — Present</p>
+        <p class="tl-title">Delivering production-grade analytics — BrentInnovate, London</p>
+        <p class="tl-body">Joined as a Data/Business Analyst and immediately took on high-stakes work: affordability models, insurance dashboards, automated pipelines. Every week brings a new challenge. Every challenge gets solved. Currently driving measurable outcomes across lending and insurance products — and actively looking for my next chapter to continue growing.</p>
+        <div class="tl-tags"><span class="tl-tag">Power BI</span><span class="tl-tag">Risk Modelling</span><span class="tl-tag">SQL Pipelines</span><span class="tl-tag">Open to Opportunities</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-section">
+  <div class="section-inner">
+    <p class="section-label">Career</p>
+    <h2 class="section-heading">Work <em>Experience</em></h2>
+    <div class="exp-list">
+
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <span class="exp-role">Data / Business Analyst</span>
+          <span class="exp-badge">Jan 2025 – Present</span>
+        </div>
+        <p class="exp-org">BrentInnovate, London</p>
+        <ul class="exp-bullets">
+          <li>Built Power BI dashboards and MI reporting using SQL-driven datasets, enabling 70% faster insights for lending and insurance decision-making.</li>
+          <li>Designed an affordability and risk assessment model analysing customer income, expenditure, and behavioural data — improving assessment accuracy by 25%.</li>
+          <li>Automated recurring reporting workflows and data extraction processes, reducing manual effort by 35% and improving reporting turnaround time.</li>
+          <li>Implemented data validation and quality assurance frameworks, increasing reporting reliability and data accuracy by 20%.</li>
+          <li>Structured scalable data models and optimised data pipelines for efficient reporting and analytics.</li>
+          <li>Collaborated with credit, insurance, analytics, and operations teams to translate business requirements into analytical solutions.</li>
+          <li>Delivered KPI dashboards and performance analytics monitoring affordability metrics, risk indicators, and customer financial behaviour.</li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="metric"><span class="metric-val">70%</span><span class="metric-lbl">Faster insights</span></div>
+          <div class="metric"><span class="metric-val">35%</span><span class="metric-lbl">Less manual work</span></div>
+          <div class="metric"><span class="metric-val">25%</span><span class="metric-lbl">Model accuracy</span></div>
+          <div class="metric"><span class="metric-val">20%</span><span class="metric-lbl">Data accuracy</span></div>
+        </div>
+      </div>
+
+      <div class="exp-card bark-line reveal d1">
+        <div class="exp-top">
+          <span class="exp-role">Business Analyst</span>
+          <span class="exp-badge">Jun 2023 – Aug 2023</span>
+        </div>
+        <p class="exp-org">Shree Pooja Multi-Specialty Hospital, India</p>
+        <ul class="exp-bullets">
+          <li>Analysed feedback from 50+ patients and led initiatives that improved overall satisfaction scores from 74% to 93%.</li>
+          <li>Reduced patient wait times by 33% and optimised patient flow efficiency by 27%, enhancing overall service delivery.</li>
+          <li>Conducted cost-benefit analysis achieving monthly operational savings of £3,000–£4,000 while maintaining high standards of care.</li>
+          <li>Transformed traditional reporting into a data-driven analytics approach, enhancing decision-making through modern BI tools and automation.</li>
+          <li>Managed end-to-end analytics projects including planning, execution, stakeholder communication, and timely delivery.</li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="metric"><span class="metric-val">93%</span><span class="metric-lbl">Satisfaction score</span></div>
+          <div class="metric"><span class="metric-val">33%</span><span class="metric-lbl">Wait time cut</span></div>
+          <div class="metric"><span class="metric-val">£4k</span><span class="metric-lbl">Monthly savings</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-inner">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-heading">Featured <em>Projects</em></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="project-tag">Hackathon · Warwick Business School</span>
+        <p class="project-name">Inclusive Credit Scoring</p>
+        <p class="project-desc">Built a credit scoring model using alternative and behavioural data — spending patterns, utility payments, and transaction history — to assess borrower reliability for individuals with limited credit history. Applied machine learning to identify key financial behaviour patterns and built a full end-to-end prototype platform, expanding potential borrower coverage by 35%.</p>
+        <div class="highlight-pills">
+          <span class="pill">+28% prediction efficiency</span><span class="pill">+35% borrower coverage</span><span class="pill">ML / Predictive Modelling</span>
+        </div>
+      </div>
+      <div class="project-card reveal d2">
+        <span class="project-tag">University Project · VIT</span>
+        <p class="project-name">SQL Injection Detection System</p>
+        <p class="project-desc">Developed a system to identify unusual SQL query patterns using machine learning techniques. Analysed database query behaviour to understand how suspicious activity impacts database systems — deepening understanding of security concepts, data structures, and analytical problem-solving under technical constraints.</p>
+        <div class="highlight-pills">
+          <span class="pill">Machine Learning</span><span class="pill">Security Analytics</span><span class="pill">Python / SQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="edu-section">
+  <div class="section-inner">
+    <p class="section-label">Academic</p>
+    <h2 class="section-heading">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <p class="edu-degree">MSc Business Analytics <span style="font-size:13px;font-weight:400;color:var(--bark);">(Merit)</span></p>
+        <p class="edu-school">University of Warwick, United Kingdom &nbsp;·&nbsp; Sep 2024 – Sep 2025</p>
+        <p class="edu-mod-label">Modules</p>
+        <p class="edu-mod-text">Business Forecasting · Advanced Business Analytics · Financial Risk Management · Data Visualisation (Power BI)</p>
+      </div>
+      <div class="edu-card reveal d2">
+        <div class="edu-icon bark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <p class="edu-degree">BTech Computer Science &amp; Engineering <span style="font-size:13px;font-weight:400;color:var(--bark);">8.0/10</span></p>
+        <p class="edu-school">Vellore Institute of Technology, India &nbsp;·&nbsp; Sep 2020 – Aug 2024</p>
+        <p class="edu-mod-label">Modules</p>
+        <p class="edu-mod-text">Computer Architecture &amp; Organisation · Software Engineering · Design and Analysis of Algorithms</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section">
+  <div class="certs-inner">
+    <h2 class="certs-heading">Certifications &amp; <em>Recognition</em></h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal d1">
+        <div class="cert-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <p class="cert-name">Power BI</p><p class="cert-issuer">Microsoft</p>
+      </div>
+      <div class="cert-card reveal d2">
+        <div class="cert-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <p class="cert-name">Natural Language Processing</p><p class="cert-issuer">Certified</p>
+      </div>
+      <div class="cert-card reveal d3">
+        <div class="cert-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.84A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.84A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+        <p class="cert-name">Generative AI</p><p class="cert-issuer">Certified</p>
+      </div>
+      <div class="cert-card reveal d4">
+        <div class="cert-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <p class="cert-name">Digital Marketing</p><p class="cert-issuer">Genval</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIRE ME CTA -->
+<section id="hire" class="hire-section">
+  <div class="hire-inner">
+    <div class="hire-box reveal">
+      <p class="hire-label">Open to Opportunities</p>
+      <h2 class="hire-heading">Ready to contribute<br><em>from day one.</em></h2>
+      <p class="hire-body">"I bring technical depth, genuine curiosity, and the dedication to see every project through — not because I have to, but because I care deeply about the work I do and the impact it creates. Hire me and you get someone who will grow with your team, challenge the status quo, and deliver results you can measure."</p>
+      <div class="hire-qualities">
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Fast learner
+        </span>
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Proactive problem-solver
+        </span>
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Proven real-world impact
+        </span>
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Warwick-trained analytically
+        </span>
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Genuinely passionate
+        </span>
+        <span class="quality-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Cross-domain experience
+        </span>
+      </div>
+      <div class="hire-cta">
+        <a href="mailto:karthikapalagiri@gmail.com" class="btn-primary">Email Me — Let's Talk</a>
+        <a href="tel:+919866034664" class="btn-outline">+91 9866034664</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-name">Karthika Reddy Palagiri</p>
+  <p class="footer-tagline">Data &amp; Business Intelligence Analyst · MSc Warwick · Actively Seeking Roles</p>
+  <div class="footer-links">
+    <a href="mailto:karthikapalagiri@gmail.com" class="footer-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      karthikapalagiri@gmail.com
+    </a>
+    <span class="footer-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18v-.08Z"/></svg>
+      +91 9866034664
+    </span>
+    <span class="footer-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Andhra Pradesh, India
+    </span>
+  </div>
+  <p class="footer-copy">Portfolio · Karthika Reddy Palagiri · 2025</p>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function animRing(){rx+=(mx-rx)*0.15;ry+=(my-ry)*0.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+
+  const dc=document.getElementById('heroDots');
+  for(let i=0;i<18;i++){
+    const d=document.createElement('div');d.className='dot';
+    const s=3+Math.random()*6;
+    d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${30+Math.random()*70}%;animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*5}s;`;
+    dc.appendChild(d);
+  }
+
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
