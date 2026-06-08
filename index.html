@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karthika Reddy Palagiri — Data & BI Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1B2E;--navy-mid:#152438;--navy-light:#1E3352;--navy-border:#243D5E;
+  --charcoal:#1A1A2E;--slate:#2E3A4E;
+  --champagne:#F5EDD8;--champagne-dark:#EDE0C4;--champagne-mid:#E0CFA8;
+  --parchment:#FAF6EE;
+  --gold:#C9963A;--gold-light:#E0B55A;--gold-pale:#F2DFA8;
+  --silver:#8A9BB0;--silver-light:#B8C6D6;--silver-pale:#D8E4EF;
+  --white:#FFFFFF;--ink:#0D1B2E;
+  --accent:#4A7FA5;--accent-light:#6B9FC4;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--parchment);font-family:'DM Sans',sans-serif;color:var(--ink);overflow-x:hidden;}
+
+/* CURSOR */
+body{cursor:none;}
+.cursor{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.cursor-ring{width:28px;height:28px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.4;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3.5rem;height:58px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,27,46,0.98);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,150,58,0.15);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--champagne);letter-spacing:0.08em;text-decoration:none;font-weight:600;}
+.nav-logo span{color:var(--gold);font-style:italic;}
+.nav-links{display:flex;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--silver);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:0 15px;height:58px;display:flex;align-items:center;font-weight:500;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:15px;right:15px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.nav-links a:hover{color:var(--champagne);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-available{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--gold-light);letter-spacing:0.1em;}
+.nav-dot{width:6px;height:6px;background:#4CAF7D;border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:7rem 3.5rem 5rem;}
+.hero-grid-lines{position:absolute;inset:0;pointer-events:none;opacity:0.03;}
+.hero-grid-lines svg{width:100%;height:100%;}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(201,150,58,0.06) 0%,transparent 65%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:10%;left:5%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(74,127,165,0.07) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:1140px;margin:0 auto;width:100%;position:relative;display:grid;grid-template-columns:1fr 340px;gap:5rem;align-items:center;}
+
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,150,58,0.1);border:1px solid rgba(201,150,58,0.25);border-radius:2px;padding:5px 14px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1.8rem;opacity:0;animation:fadeUp 0.7s 0.15s forwards;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:66px;font-weight:700;color:var(--white);line-height:1.0;margin-bottom:0.8rem;opacity:0;animation:fadeUp 0.7s 0.3s forwards;}
+.hero h1 em{display:block;font-style:italic;color:var(--gold-light);}
+.hero-role{font-size:13px;color:var(--silver);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s 0.45s forwards;}
+.hero-role span{color:var(--silver-light);}
+
+.hero-statement{border-left:2px solid var(--gold);padding:1rem 1.4rem;margin-bottom:2.2rem;opacity:0;animation:fadeUp 0.7s 0.58s forwards;}
+.hero-statement p{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--silver-light);line-height:1.75;font-style:italic;}
+.hero-statement p strong{font-style:normal;color:var(--champagne);font-weight:600;}
+
+.hero-cta{display:flex;gap:12px;opacity:0;animation:fadeUp 0.7s 0.72s forwards;flex-wrap:wrap;}
+.btn-gold{padding:12px 30px;background:var(--gold);color:var(--navy);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border:none;border-radius:1px;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s;cursor:none;}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-ghost{padding:12px 30px;background:transparent;color:var(--silver-light);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;border:1px solid rgba(138,155,176,0.3);border-radius:1px;text-decoration:none;display:inline-block;transition:all 0.2s;cursor:none;}
+.btn-ghost:hover{border-color:var(--silver-light);color:var(--white);}
+
+/* HERO PANEL */
+.hero-panel{opacity:0;animation:fadeLeft 0.8s 0.85s forwards;}
+.panel-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:1.6rem;margin-bottom:12px;}
+.panel-title{font-size:9px;text-transform:uppercase;letter-spacing:0.24em;color:var(--silver);margin-bottom:1.2rem;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.stat-row:last-of-type{border-bottom:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-light);font-weight:600;line-height:1;}
+.stat-desc{font-size:11px;color:var(--silver);text-align:right;max-width:100px;line-height:1.4;}
+.contacts-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:9px;}
+.c-item{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--silver-light);text-decoration:none;transition:color 0.2s;}
+.c-item:hover{color:var(--white);}
+.c-item svg{opacity:0.5;flex-shrink:0;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+
+/* SECTION SHARED */
+section{padding:5.5rem 3.5rem;}
+.si{max-width:1140px;margin:0 auto;}
+.s-eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold);margin-bottom:0.6rem;display:flex;align-items:center;gap:10px;}
+.s-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.s-heading{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--navy);margin-bottom:3rem;line-height:1.1;}
+.s-heading em{font-style:italic;color:var(--gold);}
+.s-heading-light{color:var(--white);}
+
+/* EXPERIENCE — SECOND SECTION */
+.exp-section{background:var(--parchment);}
+.exp-list{display:flex;flex-direction:column;gap:1.5rem;}
+.exp-card{background:var(--white);border:1px solid var(--silver-pale);border-radius:4px;padding:2.2rem 2.4rem;transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);}
+.exp-card.accent-blue::before{background:var(--accent);}
+.exp-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(13,27,46,0.1);}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px;flex-wrap:wrap;gap:10px;}
+.exp-role{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);}
+.exp-badge{background:var(--navy);color:var(--champagne);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;padding:4px 12px;border-radius:2px;font-weight:500;white-space:nowrap;}
+.exp-badge.current{background:var(--gold);color:var(--navy);}
+.exp-org{font-size:12px;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:1.4rem;}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.exp-bullets li{font-size:14px;color:#3A4A5C;line-height:1.68;padding-left:18px;position:relative;}
+.exp-bullets li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--gold);}
+.exp-metrics{display:flex;gap:10px;margin-top:1.6rem;flex-wrap:wrap;}
+.metric{background:var(--parchment);border:1px solid var(--silver-pale);border-radius:3px;padding:10px 18px;text-align:center;}
+.m-val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--navy);display:block;line-height:1;}
+.m-lbl{font-size:10px;color:var(--silver);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-top:4px;}
+
+/* PASSION */
+.passion-section{background:var(--navy-mid);}
+.passion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
+.passion-card{background:var(--navy-mid);padding:2rem;transition:background 0.25s;}
+.passion-card:hover{background:var(--navy-light);}
+.p-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:rgba(201,150,58,0.2);font-weight:700;line-height:1;margin-bottom:0.8rem;}
+.p-title{font-size:14px;font-weight:600;color:var(--champagne);margin-bottom:0.6rem;letter-spacing:0.02em;}
+.p-body{font-size:13px;color:var(--silver);line-height:1.72;}
+
+/* SKILLS */
+.skills-section{background:var(--white);}
+.skills-table{width:100%;border-collapse:collapse;}
+.skills-table tr{border-bottom:1px solid var(--silver-pale);}
+.skills-table tr:last-child{border-bottom:none;}
+.skills-table td{padding:1.2rem 0;vertical-align:top;}
+.skills-table td:first-child{width:200px;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--silver);padding-right:2rem;padding-top:1.4rem;font-weight:600;}
+.chip{display:inline-flex;align-items:center;padding:5px 13px;border-radius:2px;font-size:12px;font-weight:500;margin:3px 4px 3px 0;letter-spacing:0.02em;border:1px solid;transition:all 0.15s;cursor:none;}
+.chip:hover{transform:translateY(-1px);}
+.chip-navy{background:rgba(13,27,46,0.06);border-color:rgba(13,27,46,0.15);color:var(--navy);}
+.chip-gold{background:rgba(201,150,58,0.08);border-color:rgba(201,150,58,0.3);color:#7A5A1A;}
+.chip-blue{background:rgba(74,127,165,0.08);border-color:rgba(74,127,165,0.25);color:var(--accent);}
+
+/* WORK ETHIC */
+.ethic-section{background:var(--champagne-dark);}
+.ethic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
+.ethic-card{background:var(--white);border:1px solid rgba(13,27,46,0.08);border-radius:4px;padding:1.8rem;display:flex;gap:1.2rem;align-items:flex-start;transition:box-shadow 0.2s,transform 0.2s;}
+.ethic-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(13,27,46,0.09);}
+.ethic-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:rgba(201,150,58,0.25);line-height:1;flex-shrink:0;width:40px;}
+.ethic-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px;letter-spacing:0.01em;}
+.ethic-body{font-size:13.5px;color:#3A4A5C;line-height:1.68;}
+
+/* JOURNEY TIMELINE */
+.journey-section{background:var(--navy);}
+.timeline{position:relative;padding-left:0;display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:160px 1px 1fr;gap:0 2.5rem;padding-bottom:2.8rem;align-items:start;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-date{font-size:11px;color:var(--gold);letter-spacing:0.1em;text-align:right;padding-top:3px;font-weight:500;line-height:1.5;}
+.tl-line{position:relative;display:flex;flex-direction:column;align-items:center;}
+.tl-line::after{content:'';position:absolute;top:12px;bottom:-2.8rem;left:50%;transform:translateX(-50%);width:1px;background:rgba(255,255,255,0.08);}
+.tl-item:last-child .tl-line::after{display:none;}
+.tl-dot{width:11px;height:11px;border-radius:50%;background:var(--navy);border:2px solid var(--gold);flex-shrink:0;margin-top:2px;}
+.tl-item.accent .tl-dot{background:var(--gold);}
+.tl-content{}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px;line-height:1.3;}
+.tl-body{font-size:13px;color:var(--silver);line-height:1.72;margin-bottom:10px;}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tl-tag{background:rgba(201,150,58,0.1);border:1px solid rgba(201,150,58,0.2);color:var(--gold-pale);font-size:10px;padding:3px 10px;border-radius:2px;font-weight:500;letter-spacing:0.06em;}
+
+/* PROJECTS */
+.projects-section{background:var(--white);}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.proj-card{background:var(--parchment);border:1px solid var(--silver-pale);border-radius:4px;padding:2rem;transition:transform 0.2s,box-shadow 0.2s;position:relative;}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(13,27,46,0.1);}
+.proj-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);border-radius:4px 4px 0 0;}
+.proj-card:nth-child(2)::after{background:var(--accent);}
+.proj-tag{font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--silver);font-weight:600;margin-bottom:0.8rem;display:block;}
+.proj-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:0.8rem;line-height:1.25;}
+.proj-body{font-size:13.5px;color:#3A4A5C;line-height:1.72;margin-bottom:1.2rem;}
+.proj-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{background:rgba(13,27,46,0.06);color:var(--navy);font-size:11px;padding:4px 10px;border-radius:2px;font-weight:500;letter-spacing:0.03em;border:1px solid rgba(13,27,46,0.1);}
+
+/* EDUCATION */
+.edu-section{background:var(--champagne-dark);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.edu-card{background:var(--white);border:1px solid rgba(13,27,46,0.08);border-radius:4px;padding:2rem;position:relative;overflow:hidden;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--navy);}
+.edu-yr{font-family:'DM Mono',monospace;font-size:11px;color:var(--silver);letter-spacing:0.06em;margin-bottom:1rem;display:block;}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.25;}
+.edu-school{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:1.2rem;}
+.edu-mod-label{font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--silver);margin-bottom:6px;font-weight:600;}
+.edu-mod-text{font-size:13px;color:#3A4A5C;line-height:1.6;}
+
+/* CERTS */
+.certs-section{background:var(--navy-mid);padding:5rem 3.5rem;}
+.certs-inner{max-width:1140px;margin:0 auto;}
+.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-bottom:0;}
+.cert-card{background:var(--navy-mid);padding:1.6rem;transition:background 0.2s;cursor:none;}
+.cert-card:hover{background:var(--navy-light);}
+.cert-line{width:24px;height:1px;background:var(--gold);margin-bottom:1rem;}
+.cert-name{font-size:14px;color:var(--champagne);font-weight:500;margin-bottom:4px;line-height:1.3;}
+.cert-issuer{font-size:10px;color:var(--silver);text-transform:uppercase;letter-spacing:0.14em;}
+
+/* HIRE CTA */
+.hire-section{background:var(--navy);padding:5.5rem 3.5rem;}
+.hire-inner{max-width:1140px;margin:0 auto;}
+.hire-box{border:1px solid rgba(201,150,58,0.2);border-radius:4px;padding:4rem;position:relative;overflow:hidden;}
+.hire-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hire-eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:10px;}
+.hire-eyebrow::before,.hire-eyebrow::after{content:'';width:24px;height:1px;background:var(--gold);}
+.hire-heading{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--white);text-align:center;line-height:1.2;margin-bottom:1rem;font-weight:700;}
+.hire-heading em{color:var(--gold-light);font-style:italic;}
+.hire-body{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--silver-light);line-height:1.85;max-width:620px;margin:0 auto 2.5rem;text-align:center;font-style:italic;}
+.hire-qualities{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:2.8rem;}
+.q-tag{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--silver-light);font-size:11px;padding:6px 14px;border-radius:2px;font-weight:500;display:flex;align-items:center;gap:6px;letter-spacing:0.04em;}
+.q-tag svg{color:var(--gold);flex-shrink:0;}
+.hire-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--charcoal);border-top:1px solid rgba(255,255,255,0.05);padding:3rem 3.5rem;text-align:center;}
+.f-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--champagne);margin-bottom:0.4rem;font-weight:600;}
+.f-tagline{font-size:11px;color:var(--silver);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:2rem;}
+.f-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+.f-link{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--silver);text-decoration:none;transition:color 0.2s;}
+.f-link:hover{color:var(--champagne);}
+.f-copy{margin-top:2rem;font-size:10px;color:rgba(138,155,176,0.3);letter-spacing:0.1em;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}.d4{transition-delay:0.32s;}.d5{transition-delay:0.4s;}
+
+/* DIVIDER */
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--silver-pale),transparent);margin:0;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner,.passion-grid,.skills-table,.projects-grid,.edu-grid,.ethic-grid{grid-template-columns:1fr;}
+  .hero-panel{display:none;}
+  .hero h1{font-size:46px;}
+  .certs-grid{grid-template-columns:1fr 1fr;}
+  nav{padding:0 1.5rem;}
+  .nav-links,.nav-available{display:none;}
+  section,.passion-section,.certs-section,.hire-section{padding:3.5rem 1.5rem;}
+  .hero{padding:6rem 1.5rem 4rem;}
+  .hire-box{padding:2.5rem 1.5rem;}
+  .tl-item{grid-template-columns:120px 1px 1fr;gap:0 1.5rem;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">K. Reddy <span>Palagiri</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#passion">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hire">Contact</a></li>
+  </ul>
+  <div class="nav-available"><div class="nav-dot"></div>Open to opportunities</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-grid-lines">
+    <svg viewBox="0 0 1440 800" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1440" y2="200" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="1440" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="1440" y2="600" stroke="white" stroke-width="0.5"/>
+      <line x1="240" y1="0" x2="240" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="480" y1="0" x2="480" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="720" y1="0" x2="720" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="960" y1="0" x2="960" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="1200" y1="0" x2="1200" y2="800" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Data &amp; Business Intelligence Analyst</div>
+      <h1>Karthika<br><em>Reddy Palagiri</em></h1>
+      <p class="hero-role">MSc Business Analytics · <span>University of Warwick</span> · Power BI · SQL · Python</p>
+      <div class="hero-statement">
+        <p>I believe <strong>data is a language</strong> — one that, spoken clearly, moves organisations forward. Every dashboard I build and every insight I surface is driven by a genuine desire to <strong>make complexity understandable</strong> and decisions smarter.</p>
+      </div>
+      <div class="hero-cta">
+        <a href="#experience" class="btn-gold">View My Work</a>
+        <a href="#hire" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-card">
+        <p class="panel-title">Key impact metrics</p>
+        <div class="stat-row"><span class="stat-num">70%</span><span class="stat-desc">Faster reporting insights</span></div>
+        <div class="stat-row"><span class="stat-num">35%</span><span class="stat-desc">Reduction in manual effort</span></div>
+        <div class="stat-row"><span class="stat-num">25%</span><span class="stat-desc">Risk model accuracy lift</span></div>
+        <div class="stat-row"><span class="stat-num">93%</span><span class="stat-desc">Patient satisfaction achieved</span></div>
+      </div>
+      <div class="contacts-card">
+        <a href="mailto:karthikapalagiri@gmail.com" class="c-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          karthikapalagiri@gmail.com
+        </a>
+        <span class="c-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18v-.08Z"/></svg>
+          +91 9866034664
+        </span>
+        <span class="c-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Andhra Pradesh, India
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE — FIRST SECTION -->
+<section id="experience" class="exp-section">
+  <div class="si">
+    <p class="s-eyebrow">Professional Experience</p>
+    <h2 class="s-heading">Work <em>Record</em></h2>
+    <div class="exp-list">
+
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <span class="exp-role">Data / Business Analyst</span>
+          <span class="exp-badge current">Jan 2025 – Present</span>
+        </div>
+        <p class="exp-org">BrentInnovate &nbsp;·&nbsp; London, UK</p>
+        <ul class="exp-bullets">
+          <li>Built Power BI dashboards and MI reporting using SQL-driven datasets, enabling 70% faster insights for lending and insurance decision-making.</li>
+          <li>Designed an affordability and risk assessment model analysing customer income, expenditure, and behavioural data — improving assessment accuracy by 25%.</li>
+          <li>Automated recurring reporting workflows and data extraction processes, reducing manual effort by 35% and improving reporting turnaround time significantly.</li>
+          <li>Implemented data validation and quality assurance frameworks, increasing reporting reliability and data accuracy by 20%.</li>
+          <li>Structured scalable data models and optimised data pipelines to support efficient reporting and analytics at enterprise scale.</li>
+          <li>Collaborated with credit, insurance, analytics, and operations stakeholders to translate complex business requirements into analytical solutions.</li>
+          <li>Delivered KPI dashboards and performance analytics monitoring affordability metrics, risk indicators, and customer financial behaviour.</li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="metric"><span class="m-val">70%</span><span class="m-lbl">Faster insights</span></div>
+          <div class="metric"><span class="m-val">35%</span><span class="m-lbl">Less manual work</span></div>
+          <div class="metric"><span class="m-val">25%</span><span class="m-lbl">Model accuracy</span></div>
+          <div class="metric"><span class="m-val">20%</span><span class="m-lbl">Data accuracy</span></div>
+        </div>
+      </div>
+
+      <div class="exp-card accent-blue reveal d1">
+        <div class="exp-top">
+          <span class="exp-role">Business Analyst — Internship</span>
+          <span class="exp-badge">Jun 2023 – Aug 2023</span>
+        </div>
+        <p class="exp-org">Shree Pooja Multi-Specialty Hospital &nbsp;·&nbsp; India</p>
+        <ul class="exp-bullets">
+          <li>Analysed feedback from 50+ patients and led initiatives that improved overall satisfaction scores from 74% to 93% over the internship period.</li>
+          <li>Reduced patient wait times by 33% and optimised patient flow efficiency by 27%, directly enhancing service delivery quality.</li>
+          <li>Conducted cost-benefit analysis achieving monthly operational savings of £3,000–£4,000 while maintaining high standards of patient care.</li>
+          <li>Transformed manual reporting into a data-driven analytics approach, enhancing decision-making through BI tools and process automation.</li>
+          <li>Managed end-to-end analytics projects including planning, execution, stakeholder communication, and on-time delivery.</li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="metric"><span class="m-val">93%</span><span class="m-lbl">Satisfaction</span></div>
+          <div class="metric"><span class="m-val">33%</span><span class="m-lbl">Wait time cut</span></div>
+          <div class="metric"><span class="m-val">£4k</span><span class="m-lbl">Monthly savings</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- WHAT DRIVES ME -->
+<section id="passion" class="passion-section">
+  <div class="si">
+    <p class="s-eyebrow" style="color:var(--gold);">What Drives Me</p>
+    <h2 class="s-heading s-heading-light" style="margin-bottom:2rem;">More than a job —<br><em>a genuine calling.</em></h2>
+    <div class="passion-grid reveal">
+      <div class="passion-card">
+        <p class="p-num">01</p>
+        <p class="p-title">The thrill of discovery</p>
+        <p class="p-body">Finding the hidden story inside a messy dataset — the pattern that changes a business decision — is what gets me up in the morning. I approach every brief like a puzzle worth solving.</p>
+      </div>
+      <div class="passion-card">
+        <p class="p-num">02</p>
+        <p class="p-title">Real-world impact</p>
+        <p class="p-body">From cutting hospital wait times to helping individuals access fairer credit — I have seen analytics touch real lives. Numbers, for me, are never abstract. They represent people and decisions.</p>
+      </div>
+      <div class="passion-card">
+        <p class="p-num">03</p>
+        <p class="p-title">Relentless self-improvement</p>
+        <p class="p-body">I chose Warwick for the challenge, not the credential. I pursued Power BI, NLP, and Gen AI certifications on my own time. I don't wait for a training budget to grow — I just grow.</p>
+      </div>
+      <div class="passion-card">
+        <p class="p-num">04</p>
+        <p class="p-title">Making complexity clear</p>
+        <p class="p-body">I love translating a technically dense model or multi-source pipeline into something a non-technical stakeholder immediately understands, trusts, and acts on.</p>
+      </div>
+      <div class="passion-card">
+        <p class="p-num">05</p>
+        <p class="p-title">Full ownership</p>
+        <p class="p-body">From a hospital internship to a London analytics role — I take complete ownership of my work: from the first requirement conversation to the last quality check. I follow through.</p>
+      </div>
+      <div class="passion-card">
+        <p class="p-num">06</p>
+        <p class="p-title">Delivering under pressure</p>
+        <p class="p-body">Tight deadlines and shifting requirements are where I thrive. Every number on this page — 70% faster, 35% less effort, 25% more accurate — was delivered under real commercial pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="si">
+    <p class="s-eyebrow">Technical Toolkit</p>
+    <h2 class="s-heading">Skills &amp; <em>Technologies</em></h2>
+    <table class="skills-table">
+      <tr class="reveal d1">
+        <td>Data &amp; Analytics</td>
+        <td>
+          <span class="chip chip-navy">SQL</span><span class="chip chip-navy">Python</span><span class="chip chip-navy">R Studio</span><span class="chip chip-navy">SAS</span>
+          <span class="chip chip-navy">Statistical Modelling</span><span class="chip chip-navy">Machine Learning</span><span class="chip chip-navy">Predictive Analytics</span>
+        </td>
+      </tr>
+      <tr class="reveal d2">
+        <td>BI &amp; Visualisation</td>
+        <td>
+          <span class="chip chip-gold">Power BI</span><span class="chip chip-gold">DAX</span><span class="chip chip-gold">Power Query</span><span class="chip chip-gold">Tableau</span>
+          <span class="chip chip-gold">Advanced Excel</span><span class="chip chip-gold">VBA</span><span class="chip chip-gold">KPI Dashboards</span>
+        </td>
+      </tr>
+      <tr class="reveal d3">
+        <td>Cloud &amp; Delivery</td>
+        <td>
+          <span class="chip chip-blue">Google BigQuery</span><span class="chip chip-blue">Azure DevOps</span><span class="chip chip-blue">Power Automate</span>
+          <span class="chip chip-blue">Git</span><span class="chip chip-blue">Agile</span><span class="chip chip-blue">Generative AI</span><span class="chip chip-blue">NLP</span>
+        </td>
+      </tr>
+      <tr class="reveal d4">
+        <td>Soft Skills</td>
+        <td>
+          <span class="chip chip-navy">Stakeholder Management</span><span class="chip chip-navy">Data Storytelling</span><span class="chip chip-navy">Requirements Gathering</span>
+          <span class="chip chip-navy">Agile Delivery</span><span class="chip chip-navy">Cross-functional Collaboration</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- WORK ETHIC -->
+<section class="ethic-section">
+  <div class="si">
+    <p class="s-eyebrow">Professional Character</p>
+    <h2 class="s-heading">How I <em>Work</em></h2>
+    <div class="ethic-grid">
+      <div class="ethic-card reveal d1">
+        <div class="ethic-num">01</div>
+        <div>
+          <p class="ethic-title">Self-starter with initiative</p>
+          <p class="ethic-body">I identify gaps before they become problems. At BrentInnovate I spotted inefficient manual workflows unprompted and rebuilt them — saving the team 35% of their reporting time without being asked.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d2">
+        <div class="ethic-num">02</div>
+        <div>
+          <p class="ethic-title">Collaborative communicator</p>
+          <p class="ethic-body">I bridge technical and non-technical teams effectively. Whether presenting to credit directors or working with operations, I adapt the message so the data leads to action, not confusion.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d3">
+        <div class="ethic-num">03</div>
+        <div>
+          <p class="ethic-title">Rigorous attention to quality</p>
+          <p class="ethic-body">Data quality is non-negotiable. My validation frameworks improved accuracy by 20% — because I know a polished dashboard built on dirty data is worse than no dashboard at all.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d4">
+        <div class="ethic-num">04</div>
+        <div>
+          <p class="ethic-title">Adaptable across domains</p>
+          <p class="ethic-body">Healthcare to lending to insurance — I switch contexts without missing a beat. I ask sharp questions, learn the domain fast, and deliver insights without needing hand-holding.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d1">
+        <div class="ethic-num">05</div>
+        <div>
+          <p class="ethic-title">Ownership from brief to delivery</p>
+          <p class="ethic-body">From hackathon prototype to production analytics — I take complete responsibility for my work. I don't stop at "technically done." I track impact and iterate until it's genuinely useful.</p>
+        </div>
+      </div>
+      <div class="ethic-card reveal d2">
+        <div class="ethic-num">06</div>
+        <div>
+          <p class="ethic-title">Continuously learning</p>
+          <p class="ethic-body">MSc at Warwick. Microsoft Power BI certified. NLP and Gen AI certified — self-funded, on personal time. I invest in skills because the field moves fast and I intend to stay ahead of it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section id="journey" class="journey-section">
+  <div class="si">
+    <p class="s-eyebrow" style="color:var(--gold);">Growth Story</p>
+    <h2 class="s-heading s-heading-light" style="margin-bottom:3rem;">Career <em>Timeline</em></h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal d1">
+        <p class="tl-date">Sep 2020 –<br>Aug 2024</p>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <p class="tl-title">BTech Computer Science — VIT (8.0/10)</p>
+          <p class="tl-body">Built strong foundations in algorithms, software engineering, and data structures. Began self-studying SQL and Python alongside coursework out of genuine curiosity about what data can reveal — not because it was required.</p>
+          <div class="tl-tags"><span class="tl-tag">CS Fundamentals</span><span class="tl-tag">SQL</span><span class="tl-tag">Python</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <p class="tl-date">Jun 2023 –<br>Aug 2023</p>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <p class="tl-title">Business Analyst Internship — Shree Pooja Hospital</p>
+          <p class="tl-body">First real-world role confirmed everything. Analytics reduced patient wait times by 33% and lifted satisfaction from 74% to 93%. I saw directly how data improves lives — and that became the mission.</p>
+          <div class="tl-tags"><span class="tl-tag">Business Analysis</span><span class="tl-tag">Power BI</span><span class="tl-tag">Process Improvement</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item accent reveal d3">
+        <p class="tl-date">2023 –<br>Ongoing</p>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <p class="tl-title">Self-directed certifications — Power BI, NLP, Generative AI</p>
+          <p class="tl-body">Pursued industry certifications independently, outside of any curriculum. Not because they were required, but because staying ahead in analytics demands continuous investment. This is the kind of employee I am.</p>
+          <div class="tl-tags"><span class="tl-tag">Power BI Certified</span><span class="tl-tag">NLP</span><span class="tl-tag">Gen AI</span><span class="tl-tag">Digital Marketing</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d1">
+        <p class="tl-date">Sep 2024 –<br>Sep 2025</p>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <p class="tl-title">MSc Business Analytics (Merit) — University of Warwick</p>
+          <p class="tl-body">Chose Warwick for rigour. Studied financial risk management, advanced analytics, and forecasting. Built a full credit-scoring prototype in a 48-hour hackathon. Graduated with Merit.</p>
+          <div class="tl-tags"><span class="tl-tag">Warwick Merit</span><span class="tl-tag">Financial Risk</span><span class="tl-tag">Hackathon</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item accent reveal d2">
+        <p class="tl-date">Jan 2025 –<br>Present</p>
+        <div class="tl-line"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <p class="tl-title">Data / Business Analyst — BrentInnovate, London</p>
+          <p class="tl-body">Production-grade dashboards, affordability models, and automated pipelines across lending and insurance. Delivering measurable results weekly. Currently open to the next chapter where the challenges are bigger.</p>
+          <div class="tl-tags"><span class="tl-tag">Power BI</span><span class="tl-tag">Risk Modelling</span><span class="tl-tag">SQL Pipelines</span><span class="tl-tag">Open to Roles</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="si">
+    <p class="s-eyebrow">Portfolio</p>
+    <h2 class="s-heading">Selected <em>Projects</em></h2>
+    <div class="projects-grid">
+      <div class="proj-card reveal">
+        <span class="proj-tag">Hackathon &nbsp;·&nbsp; Warwick Business School</span>
+        <p class="proj-name">Inclusive Credit Scoring Model</p>
+        <p class="proj-body">Developed a credit scoring model using alternative and behavioural data — spending patterns, utility payments, transaction history — to assess borrower reliability for individuals with limited credit history. Applied machine learning to identify key financial behaviour patterns and built an end-to-end prototype platform expanding potential borrower coverage by 35%.</p>
+        <div class="proj-pills">
+          <span class="pill">+28% prediction efficiency</span><span class="pill">+35% borrower coverage</span><span class="pill">Machine Learning</span><span class="pill">Predictive Modelling</span>
+        </div>
+      </div>
+      <div class="proj-card reveal d2">
+        <span class="proj-tag">University Project &nbsp;·&nbsp; VIT</span>
+        <p class="proj-name">SQL Injection Detection System</p>
+        <p class="proj-body">Built a system to identify unusual SQL query patterns using machine learning techniques. Analysed database query behaviour to understand how suspicious activity impacts database integrity — strengthening understanding of security analytics, data structures, and query performance under adversarial conditions.</p>
+        <div class="proj-pills">
+          <span class="pill">Machine Learning</span><span class="pill">Security Analytics</span><span class="pill">Python</span><span class="pill">SQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="edu-section">
+  <div class="si">
+    <p class="s-eyebrow">Academic Background</p>
+    <h2 class="s-heading">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <span class="edu-yr">Sep 2024 – Sep 2025</span>
+        <p class="edu-degree">MSc Business Analytics <span style="font-size:13px;font-weight:400;color:var(--silver);">(Merit)</span></p>
+        <p class="edu-school">University of Warwick, United Kingdom</p>
+        <p class="edu-mod-label">Modules</p>
+        <p class="edu-mod-text">Business Forecasting · Advanced Business Analytics · Financial Risk Management · Data Visualisation (Power BI)</p>
+      </div>
+      <div class="edu-card reveal d2">
+        <span class="edu-yr">Sep 2020 – Aug 2024</span>
+        <p class="edu-degree">BTech Computer Science &amp; Engineering <span style="font-size:13px;font-weight:400;color:var(--silver);">8.0/10</span></p>
+        <p class="edu-school">Vellore Institute of Technology, India</p>
+        <p class="edu-mod-label">Modules</p>
+        <p class="edu-mod-text">Computer Architecture &amp; Organisation · Software Engineering · Design and Analysis of Algorithms</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section">
+  <div class="certs-inner">
+    <p class="s-eyebrow" style="color:var(--gold);margin-bottom:1.8rem;">Certifications</p>
+    <div class="certs-grid">
+      <div class="cert-card reveal d1">
+        <div class="cert-line"></div>
+        <p class="cert-name">Power BI</p><p class="cert-issuer">Microsoft</p>
+      </div>
+      <div class="cert-card reveal d2">
+        <div class="cert-line"></div>
+        <p class="cert-name">Natural Language Processing</p><p class="cert-issuer">Certified</p>
+      </div>
+      <div class="cert-card reveal d3">
+        <div class="cert-line"></div>
+        <p class="cert-name">Generative AI</p><p class="cert-issuer">Certified</p>
+      </div>
+      <div class="cert-card reveal d4">
+        <div class="cert-line"></div>
+        <p class="cert-name">Digital Marketing</p><p class="cert-issuer">Genval</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIRE ME -->
+<section id="hire" class="hire-section">
+  <div class="hire-inner">
+    <div class="hire-box reveal">
+      <p class="hire-eyebrow">Open to Opportunities</p>
+      <h2 class="hire-heading">Ready to contribute<br><em>from day one.</em></h2>
+      <p class="hire-body">"I bring technical depth, genuine curiosity, and the discipline to see every project through. Hire me and you get someone who will grow with your team, raise the standard of your analytics, and deliver results you can measure."</p>
+      <div class="hire-qualities">
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Warwick-trained analytically</span>
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Proven commercial impact</span>
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cross-domain experience</span>
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Self-directed learner</span>
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Fast onboarding, full ownership</span>
+        <span class="q-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Genuinely passionate about data</span>
+      </div>
+      <div class="hire-cta">
+        <a href="mailto:karthikapalagiri@gmail.com" class="btn-gold">Email — Let's Talk</a>
+        <a href="tel:+919866034664" class="btn-ghost">+91 9866034664</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="f-name">Karthika Reddy Palagiri</p>
+  <p class="f-tagline">Data &amp; Business Intelligence Analyst · MSc Warwick · Actively Seeking Roles</p>
+  <div class="f-links">
+    <a href="mailto:karthikapalagiri@gmail.com" class="f-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      karthikapalagiri@gmail.com
+    </a>
+    <span class="f-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18v-.08Z"/></svg>
+      +91 9866034664
+    </span>
+    <span class="f-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Andhra Pradesh, India
+    </span>
+  </div>
+  <p class="f-copy">Portfolio · Karthika Reddy Palagiri · 2025</p>
+</footer>
+
+<script>
+  const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function ar(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
